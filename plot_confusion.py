@@ -4,7 +4,7 @@ from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
 
 
 
-def plot_confusion(y_test, y_pred, labels, title, savefig = False, count = {'star':1301314924, 'quasar': 621523, 'galaxy':172752}):
+def plot_confusion(y_test, y_pred, labels, title, corrected = False, savefig = False, count = {'star':1301314924, 'quasar': 621523, 'galaxy':172752}):
     """
     Example:
     
@@ -20,8 +20,9 @@ def plot_confusion(y_test, y_pred, labels, title, savefig = False, count = {'sta
     """
     cm = confusion_matrix(y_test, y_pred, labels=labels)
 
-    for i, cl in enumerate(labels):
-        cm[i,:] = cm[i,:]*(count[cl]/np.sum(cm[i,:]))
+    if corrected:
+        for i, cl in enumerate(labels):
+            cm[i,:] = cm[i,:]*(count[cl]/np.sum(cm[i,:]))
 
     disp = ConfusionMatrixDisplay(confusion_matrix=cm,
                                   display_labels=labels
@@ -37,7 +38,7 @@ def plot_confusion(y_test, y_pred, labels, title, savefig = False, count = {'sta
     
     ax.set_title(title)
 
-    if savefig == True:
+    if savefig:
         plt.savefig('confusion.pdf')
 
     plt.show()
