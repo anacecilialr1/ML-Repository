@@ -20,10 +20,7 @@ def best_RF(X, y, random_state = 42, verbose = True):
     by RandomizedSearchCV.
     
     """
-    
-    #Splits the data into training and testing samples
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.2, random_state = random_state)
-    
+
     #Hyperparameter grid to be tested
     params = {'n_estimators': 'n_estimators': list(range(100, 1000)),
     'max_depth': list(range(1, 13)),
@@ -32,7 +29,7 @@ def best_RF(X, y, random_state = 42, verbose = True):
     #Randomized search on hyper parameters
     search = RandomizedSearchCV(RandomForestClassifier(random_state=42), params, cv=5, n_iter = 50, n_jobs=-1)
     #Fit the search to the data
-    search.fit(X_train, y_train)
+    search.fit(X, y)
 
     #Find the best classifier
     best_RFmodel = search.best_estimator_
