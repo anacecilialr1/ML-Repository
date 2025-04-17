@@ -36,6 +36,27 @@ class GMMClassifier(ClassifierMixin, BaseEstimator):
         In addition, it controls the generation of random samples from the
         fitted distribution (see the method `sample`).
         Pass an int for reproducible output across multiple function calls.
+
+    priors : dict
+        Prior probabilities for each class, used to weight class‐conditional
+        likelihoods when computing `predict_proba`. Keys must match `classes_`.
+
+    prob_scale : float
+        Scaling factor.  During `predict_proba`, the
+        combined log‐posterior `(log p(x|c) + log π_c)` is divided by
+        `prob_scale` before exponentiation, avoiding if log_prob < -1000 then 
+        np.exp(log_prob) return 0
+
+    Attributes
+    ----------
+
+    classes_ : ndarray of shape (n_classes,)
+        Unique class labels seen during fitting.
+
+    gmms_ : dict 
+        A mapping from each class label (same as in `classes_`) to its
+        fitted `GaussianMixture` instance.  After `fit(X, y)`, you can
+        inspect `gmms_[c].weights_`, `gmms_[c].means_`, etc., for each class.
     """
 
     def __init__(self, n_components=2, covariance_type='full', random_state=None, priors = {'star':0.99939, 'quasar': 0.00047, 'galaxy':0.00014}, prob_scale = 2):
@@ -103,4 +124,7 @@ class GMMClassifier(ClassifierMixin, BaseEstimator):
 
 
 def best_GMM(random_state=42):
+    """
+    Return a manually-chosen best model during traning
+    """
     return GMMClassifier(n_components=14, covariance_type='full', prob_scale = 3, random_state=random_state)
