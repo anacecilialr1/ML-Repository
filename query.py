@@ -27,7 +27,7 @@ def query(mode):
     """
     ## Check if the imput parameter is a string
     if not isinstance(mode, str):
-      raise TypeError("Expected string, got %s" % (type(set),))
+      raise TypeError("Expected string, got %s" % (type(mode),))
 
     ## Retrieves the training sample of 15000 elements per class
     if mode == 'training':
@@ -165,25 +165,17 @@ def query(mode):
       raise ValueError("Select a querry for testing or for training")
 
     # Launches ADQL queries to the Gaia DR3 archive
-    jobq = Gaia.launch_job_async(query_quasar)
-    jobg = Gaia.launch_job_async(query_galaxy)
-    jobs = Gaia.launch_job_async(query_star)
+    def get_data(query):
+        
+        job = Gaia.launch_job_async(query)
+        table = job.get_results()
+        data = table.to_pandas()
+        
+        return data
 
-    gtable = jobg.get_results()
-    stable = jobs.get_results()
-    qtable = jobq.get_results()
-
-    # Using pandas to compute new relevant columns
-    datag = gtable.to_pandas()
-    datas = stable.to_pandas()
-    dataq = qtable.to_pandas()
-    
+    combined = pd.concat([get_data(query_star), get_data(query_galaxy), get_data(query_quasar)], ignore_index=True)
     # Creates label column based on the maximum class probability
-    datag['classification'] = datag[['quasar', 'galaxy', 'star']].idxmax(axis=1, skipna = True)
-    datas['classification'] = datas[['quasar', 'galaxy', 'star']].idxmax(axis=1, skipna = True)
-    dataq['classification'] = dataq[['quasar', 'galaxy', 'star']].idxmax(axis=1, skipna = True)
-
-    combined = pd.concat([datag, datas, dataq], ignore_index=True)
+    combined['classification'] = combined[['quasar', 'galaxy', 'star']].idxmax(axis=1, skipna = True)
 
     # Prints the value counts of each class
     print(combined['classification'].value_counts())
@@ -194,6 +186,7 @@ def query(mode):
     combined['sinb']  = np.sin(combined['b']* np.pi / 180)
 
     return combined
+
 
     
     
