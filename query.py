@@ -8,7 +8,7 @@ def query(mode):
 
     Parameters:
     -----------
-    set : str
+    mode : str
         Either 'training' or 'testing'. Determines the size of the sample
         - 'training': returns 15,000 elements per class (star, galaxy, quasar)
         - 'testing': returns 150,000 elements per class, offset by random_index for no overlap
