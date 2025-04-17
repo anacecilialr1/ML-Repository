@@ -160,7 +160,7 @@ def query(mode):
                 AND p.classprob_dsc_allosmod_quasar > 0.999\
                 AND dr3.phot_g_mean_mag > 14.5\
                 ORDER BY dr3.random_index"
-        print('Retrieving training dataset')
+        print('Retrieving testing dataset')
     else: 
       raise ValueError("Select a querry for testing or for training")
 
