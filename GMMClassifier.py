@@ -123,8 +123,11 @@ class GMMClassifier(ClassifierMixin, BaseEstimator):
 
 
 
-def best_GMM(random_state=42):
+def best_GMM(random_state=42, verbose = False):
     """
     Return a manually-chosen best model during traning
     """
-    return GMMClassifier(n_components=14, covariance_type='full', prob_scale = 3, random_state=random_state)
+    model = GMMClassifier(n_components=14, covariance_type='full', prob_scale = 3, random_state=random_state)
+    if verbose:
+        print("Best Parameters:", model)
+    return model
