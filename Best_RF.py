@@ -2,7 +2,7 @@ import numpy as np
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import train_test_split, RandomizedSearchCV
 
-def best_RF(X, y, verbose = True):
+def best_RF(X, y, random_state = 42, verbose = True):
     
     """This function finds the optimal hyperparameters for a Random Forest
     classifier using RandomizedSearchCV
@@ -27,11 +27,12 @@ def best_RF(X, y, verbose = True):
     'min_samples_split': [2, 3, 4]}
     
     #Randomized search on hyper parameters
-    search = RandomizedSearchCV(RandomForestClassifier(random_state=42), params, cv=5, n_iter = 50, n_jobs=-1)
+    search = RandomizedSearchCV(RandomForestClassifier(random_state=random_state), params, cv=5, n_iter = 50, n_jobs=-1)
     #Fit the search to the data
     search.fit(X, y)
 
     #Find the best classifier
     best_RFmodel = search.best_estimator_
+    best_RFmodel.set_params(random_state = random_state)
 
     return best_RFmodel
