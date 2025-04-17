@@ -51,7 +51,7 @@ pip install numpy pandas matplotlib astropy scikit-learn
 2. Run the main script:
 
 ```bash
-python Final_Project.py
+python main.py
 ```
 
 It will:
