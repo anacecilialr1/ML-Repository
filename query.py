@@ -71,7 +71,6 @@ def query(mode):
                 AND dr3.phot_g_mean_flux_over_error is not null\
                 AND p.classprob_dsc_allosmod_star > 0.999\
                 AND dr3.phot_g_mean_mag > 14.5\
-                AND 0.3 + 1.1*dr3.bp_g - 0.29*POWER((dr3.bp_g),2) < dr3.g_rp\
                 ORDER BY dr3.random_index"
         
         # Querry to retrieve the elements classified as quasars
@@ -140,7 +139,6 @@ def query(mode):
                 AND dr3.phot_g_mean_flux_over_error is not null\
                 AND p.classprob_dsc_allosmod_star > 0.999\
                 AND dr3.phot_g_mean_mag > 14.5\
-                AND 0.3 + 1.1*dr3.bp_g - 0.29*POWER((dr3.bp_g),2) < dr3.g_rp\
                 ORDER BY dr3.random_index"
 
         # Querry to retrieve the elements classified as quasars
@@ -162,7 +160,6 @@ def query(mode):
                 AND dr3.phot_g_mean_flux_over_error is not null\
                 AND p.classprob_dsc_allosmod_quasar > 0.999\
                 AND dr3.phot_g_mean_mag > 14.5\
-                AND 0.3 + 1.1*dr3.bp_g - 0.29*POWER((dr3.bp_g),2) < dr3.g_rp\
                 ORDER BY dr3.random_index"
         print('Retrieving training dataset')
     else: 
