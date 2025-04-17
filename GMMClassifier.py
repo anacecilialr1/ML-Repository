@@ -123,7 +123,7 @@ class GMMClassifier(ClassifierMixin, BaseEstimator):
 
 
 
-def best_GMM(random_state=42, verbose = False):
+def best_GMM(X, y, random_state=42, verbose = False):
     """
     Return a manually-chosen best model during traning
     """
