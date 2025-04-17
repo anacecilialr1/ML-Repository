@@ -1,7 +1,7 @@
 from sklearn.ensemble import AdaBoostClassifier
 from sklearn.model_selection import train_test_split, RandomizedSearchCV
 
-def train_best_adaboost(X_train, y_train, random_state=42, verbose=True):
+def best_adaboost(X_train, y_train, random_state=42, verbose=True):
     """
     Trains an AdaBoost classifier with hyperparameter tuning using RandomizedSearchCV.
 
