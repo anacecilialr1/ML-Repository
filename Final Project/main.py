@@ -15,10 +15,10 @@ from sklearn.pipeline import Pipeline
 from sklearn.inspection import permutation_importance
 
 # Best model imports
-from Classifiers.Best_Adaboost import train_best_adaboost
+from Classifiers.Best_Adaboost import best_adaboost
 from Classifiers.Best_RF import best_RF
 from Classifiers.GMMClassifier import best_GMM
-from Classifiers.Best_SVM import train_best_svm
+from Classifiers.Best_SVM import best_svm
 
 # Utilities
 from Utilities.plot_confusion import plot_confusion, plot_feature_importances
@@ -75,9 +75,9 @@ def train_stacking_classifier(fits_input_path,random_state = 42,verbose=False):
     ###### End of interlude
 
     # Get best models
-    clf_ab = train_best_adaboost(X_train, y_train, random_state = random_state)
+    clf_ab = best_adaboost(X_train, y_train, random_state = random_state)
     clf_rf = best_RF(X_train, y_train,random_state = random_state)
-    clf_svm = train_best_svm(X_train, y_train,random_state = random_state)
+    clf_svm = best_svm(X_train, y_train,random_state = random_state)
     clf_gmm = best_GMM(X_train,y_train, random_state = random_state)
 
     
