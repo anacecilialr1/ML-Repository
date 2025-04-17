@@ -1,6 +1,16 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
+import matplotlib as mpl
+
+mpl.rcParams.update({
+    'font.size':       14,   # base font size for text
+    'axes.titlesize':  16,   # title
+    'axes.labelsize':  14,   # x/y label
+    'xtick.labelsize': 12,   # tick labels
+    'ytick.labelsize': 12,
+    'legend.fontsize': 12
+})
 
 
 
