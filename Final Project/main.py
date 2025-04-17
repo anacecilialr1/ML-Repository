@@ -92,7 +92,7 @@ def train_stacking_classifier(fits_input_path,random_state = 42,verbose=False):
     # Final estimator for the stacking classifier
     final_estimator = Pipeline([
         ("scaler", StandardScaler()),
-        ("clf", LogisticRegression())
+        ("clf", LogisticRegression(random_state = random_state))
     ])
 
     # Build stacking classifier
