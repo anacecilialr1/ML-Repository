@@ -2,7 +2,7 @@ from astroquery.gaia import Gaia
 import pandas as pd
 import numpy as np
 
-def querry(set):
+def query(mode):
     """
     Retrieves a labeled sample of Gaia DR3 sources
 
@@ -26,11 +26,11 @@ def querry(set):
 
     """
     ## Check if the imput parameter is a string
-    if not isinstance(set, str):
+    if not isinstance(mode, str):
       raise TypeError("Expected string, got %s" % (type(set),))
 
     ## Retrieves the training sample of 15000 elements per class
-    if set == 'training':
+    if mode == 'training':
 
         # Querry to retrieve the elements classified as galaxies
         query_galaxy = "SELECT TOP 15000 dr3.source_id, dr3.random_index, dr3.ra, dr3.dec, dr3.b, dr3.parallax, dr3.pm, dr3.phot_g_mean_mag, dr3.bp_g, dr3.g_rp,\
@@ -71,7 +71,6 @@ def querry(set):
                 AND dr3.phot_g_mean_flux_over_error is not null\
                 AND p.classprob_dsc_allosmod_star > 0.999\
                 AND dr3.phot_g_mean_mag > 14.5\
-                AND 0.3 + 1.1*dr3.bp_g - 0.29*POWER((dr3.bp_g),2) < dr3.g_rp\
                 ORDER BY dr3.random_index"
         
         # Querry to retrieve the elements classified as quasars
@@ -92,12 +91,11 @@ def querry(set):
                 AND dr3.phot_g_mean_flux_over_error is not null\
                 AND p.classprob_dsc_allosmod_quasar > 0.999\
                 AND dr3.phot_g_mean_mag > 14.5\
-                AND 0.3 + 1.1*dr3.bp_g - 0.29*POWER((dr3.bp_g),2) < dr3.g_rp\
                 ORDER BY dr3.random_index"
         print('Retrieving training dataset')
 
     ## Retrieves the testing sample of 15000 elements per class        
-    elif set == 'testing':
+    elif mode == 'testing':
         
         # Querry to retrieve the elements classified as galaxies
         query_galaxy = "SELECT TOP 150000 dr3.source_id, dr3.random_index, dr3.ra, dr3.dec, dr3.b, dr3.parallax, dr3.pm, dr3.phot_g_mean_mag, dr3.bp_g, dr3.g_rp,\
@@ -140,7 +138,6 @@ def querry(set):
                 AND dr3.phot_g_mean_flux_over_error is not null\
                 AND p.classprob_dsc_allosmod_star > 0.999\
                 AND dr3.phot_g_mean_mag > 14.5\
-                AND 0.3 + 1.1*dr3.bp_g - 0.29*POWER((dr3.bp_g),2) < dr3.g_rp\
                 ORDER BY dr3.random_index"
 
         # Querry to retrieve the elements classified as quasars
@@ -162,7 +159,6 @@ def querry(set):
                 AND dr3.phot_g_mean_flux_over_error is not null\
                 AND p.classprob_dsc_allosmod_quasar > 0.999\
                 AND dr3.phot_g_mean_mag > 14.5\
-                AND 0.3 + 1.1*dr3.bp_g - 0.29*POWER((dr3.bp_g),2) < dr3.g_rp\
                 ORDER BY dr3.random_index"
         print('Retrieving training dataset')
     else: 
