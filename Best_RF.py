@@ -2,7 +2,7 @@ import numpy as np
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import train_test_split, RandomizedSearchCV
 
-def best_RF(X, y, random_state = 42, verbose = True):
+def best_RF(X, y, verbose = True):
     
     """This function finds the optimal hyperparameters for a Random Forest
     classifier using RandomizedSearchCV
