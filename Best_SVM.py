@@ -24,11 +24,6 @@ def train_best_svm(X, y, test_size=0.2, random_state=42, verbose=True):
         The best pipeline (scaler + SVM) found by RandomizedSearchCV.
     """
 
-    # Split the dataset into train and test
-    X_train, X_test, y_train, y_test = train_test_split(
-        X, y, test_size=test_size, stratify=y, random_state=random_state
-    )
-
     # SVM
     classifier = Pipeline([
         ("scaler", StandardScaler()),
@@ -57,7 +52,7 @@ def train_best_svm(X, y, test_size=0.2, random_state=42, verbose=True):
     )
 
     # Fit the model on the training set
-    search.fit(X_train, y_train)
+    search.fit(X, y)
 
     if verbose:
         print("Best Parameters:", search.best_params_)
