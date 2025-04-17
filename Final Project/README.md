@@ -18,7 +18,7 @@ Project Structure
 
 ```
 .
-├── Final_Project.py              # Main script with training and prediction functions
+├── main.py              # Main script with training and prediction functions
 ├── Classifiers/
 │   ├── Best_Adaboost.py         # AdaBoost with hyperparameter tuning
 │   ├── Best_RF.py               # Random Forest with tuning
