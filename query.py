@@ -32,7 +32,7 @@ def query(mode):
     ## Retrieves the training sample of 15000 elements per class
     if mode == 'training':
 
-        # Querry to retrieve the elements classified as galaxies
+        # Query to retrieve the elements classified as galaxies
         query_galaxy = "SELECT TOP 15000 dr3.source_id, dr3.random_index, dr3.ra, dr3.dec, dr3.b, dr3.parallax, dr3.pm, dr3.phot_g_mean_mag, dr3.bp_g, dr3.g_rp,\
                         dr3.astrometric_chi2_al, dr3.astrometric_n_good_obs_al, dr3.phot_g_n_obs, dr3.phot_g_mean_flux_over_error,\
                         p.classprob_dsc_allosmod_quasar AS quasar, p.classprob_dsc_allosmod_galaxy AS galaxy,\
@@ -53,7 +53,7 @@ def query(mode):
                 AND 0.3 + 1.1*dr3.bp_g - 0.29*POWER((dr3.bp_g),2) < dr3.g_rp\
                 ORDER BY dr3.random_index"
 
-        # Querry to retrieve the elements classified as stars
+        # Query to retrieve the elements classified as stars
         query_star = "SELECT TOP 15000 dr3.source_id, dr3.random_index, dr3.ra, dr3.dec, dr3.b, dr3.parallax, dr3.pm, dr3.phot_g_mean_mag, dr3.bp_g, dr3.g_rp,\
                         dr3.astrometric_chi2_al, dr3.astrometric_n_good_obs_al, dr3.phot_g_n_obs, dr3.phot_g_mean_flux_over_error,\
                         p.classprob_dsc_allosmod_quasar AS quasar, p.classprob_dsc_allosmod_galaxy AS galaxy,\
@@ -73,7 +73,7 @@ def query(mode):
                 AND dr3.phot_g_mean_mag > 14.5\
                 ORDER BY dr3.random_index"
         
-        # Querry to retrieve the elements classified as quasars
+        # Query to retrieve the elements classified as quasars
         query_quasar =  "SELECT TOP 15000 dr3.source_id, dr3.random_index, dr3.ra, dr3.dec, dr3.b, dr3.parallax, dr3.pm, dr3.phot_g_mean_mag, dr3.bp_g, dr3.g_rp,\
                         dr3.astrometric_chi2_al, dr3.astrometric_n_good_obs_al, dr3.phot_g_n_obs, dr3.phot_g_mean_flux_over_error,\
                         p.classprob_dsc_allosmod_quasar AS quasar, p.classprob_dsc_allosmod_galaxy AS galaxy,\
@@ -97,7 +97,7 @@ def query(mode):
     ## Retrieves the testing sample of 15000 elements per class        
     elif mode == 'testing':
         
-        # Querry to retrieve the elements classified as galaxies
+        # Query to retrieve the elements classified as galaxies
         query_galaxy = "SELECT TOP 150000 dr3.source_id, dr3.random_index, dr3.ra, dr3.dec, dr3.b, dr3.parallax, dr3.pm, dr3.phot_g_mean_mag, dr3.bp_g, dr3.g_rp,\
                         dr3.astrometric_chi2_al, dr3.astrometric_n_good_obs_al, dr3.phot_g_n_obs, dr3.phot_g_mean_flux_over_error,\
                         p.classprob_dsc_allosmod_quasar AS quasar, p.classprob_dsc_allosmod_galaxy AS galaxy,\
@@ -119,7 +119,7 @@ def query(mode):
                 AND 0.3 + 1.1*dr3.bp_g - 0.29*POWER((dr3.bp_g),2) < dr3.g_rp\
                 ORDER BY dr3.random_index"
 
-        # Querry to retrieve the elements classified as stars
+        # Query to retrieve the elements classified as stars
         query_star = "SELECT TOP 150000 dr3.source_id, dr3.random_index, dr3.ra, dr3.dec, dr3.b, dr3.parallax, dr3.pm, dr3.phot_g_mean_mag, dr3.bp_g, dr3.g_rp,\
                         dr3.astrometric_chi2_al, dr3.astrometric_n_good_obs_al, dr3.phot_g_n_obs, dr3.phot_g_mean_flux_over_error,\
                         p.classprob_dsc_allosmod_quasar AS quasar, p.classprob_dsc_allosmod_galaxy AS galaxy,\
@@ -140,7 +140,7 @@ def query(mode):
                 AND dr3.phot_g_mean_mag > 14.5\
                 ORDER BY dr3.random_index"
 
-        # Querry to retrieve the elements classified as quasars
+        # Query to retrieve the elements classified as quasars
         query_quasar =  "SELECT TOP 150000 dr3.source_id, dr3.random_index, dr3.ra, dr3.dec, dr3.b, dr3.parallax, dr3.pm, dr3.phot_g_mean_mag, dr3.bp_g, dr3.g_rp,\
                         dr3.astrometric_chi2_al, dr3.astrometric_n_good_obs_al, dr3.phot_g_n_obs, dr3.phot_g_mean_flux_over_error,\
                         p.classprob_dsc_allosmod_quasar AS quasar, p.classprob_dsc_allosmod_galaxy AS galaxy,\
@@ -162,7 +162,7 @@ def query(mode):
                 ORDER BY dr3.random_index"
         print('Retrieving testing dataset')
     else: 
-      raise ValueError("Select a querry for testing or for training")
+      raise ValueError("Select a query for testing or for training")
 
     # Launches ADQL queries to the Gaia DR3 archive
     def get_data(query):
