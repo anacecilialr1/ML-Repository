@@ -4,7 +4,7 @@ from sklearn.model_selection import train_test_split, RandomizedSearchCV
 from sklearn.preprocessing import StandardScaler
 from scipy.stats import uniform, reciprocal
 
-def train_best_svm(X_train, y_train, test_size=0.2, random_state=42, verbose=False):
+def best_svm(X, y, random_state=42, verbose=True):
     """
     Trains an SVM classifier with hyperparameter tuning using RandomizedSearchCV.
 
@@ -12,7 +12,6 @@ def train_best_svm(X_train, y_train, test_size=0.2, random_state=42, verbose=Fal
     ----------
     X : features.
     y : target labels.
-    test_size : Fraction of data to be used as test set.
     random_state : int
         Random seed for reproducibility.
     verbose : bool
@@ -52,10 +51,12 @@ def train_best_svm(X_train, y_train, test_size=0.2, random_state=42, verbose=Fal
     )
 
     # Fit the model on the training set
-    search.fit(X_train, y_train)
+    search.fit(X, y)
 
     if verbose:
         print("Best Parameters:", search.best_params_)
         print("Best Score (f1_weighted):", search.best_score_)
+    model = search.best_estimator_
+    model.set_params(random_state=random_state)
 
-    return search.best_estimator_
+    return model

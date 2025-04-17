@@ -1,19 +1,18 @@
 from sklearn.ensemble import AdaBoostClassifier
 from sklearn.model_selection import train_test_split, RandomizedSearchCV
 
-def train_best_adaboost(X_train, y_train, test_size=0.5, random_state=423454, verbose=True):
+def train_best_adaboost(X_train, y_train, random_state=42, verbose=True):
     """
     Trains an AdaBoost classifier with hyperparameter tuning using RandomizedSearchCV.
 
     Parameters
     ----------
-    X : Features
-    y : Classifications
-    test_size : Proportion of dataset to include in the test split.
+    X : features.
+    y : target labels.
     random_state : int
-        Random seed
-    verbose : 
-        If True, prints the best parameters and score.
+        Random seed for reproducibility.
+    verbose : bool
+        If True, prints best parameters and score.
 
     Returns
     -------
@@ -39,5 +38,6 @@ def train_best_adaboost(X_train, y_train, test_size=0.5, random_state=423454, ve
 
     # Best model
     best_model = search.best_estimator_
+    best_model.set_params(random_state=random_state)
 
     return best_model
